@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Page</title>
+</head>
+<body>
+
+    <h1>BasicRules.json Content</h1>
+
+    <pre id="jsonContent"></pre>
+    <p id="errorText" style="color: red;"></p>
+
+    <script>
+        // 使用Fetch API获取BasicRules.json文件内容
+        fetch('BasicRules.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch BasicRules.json');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // 将JSON对象转为字符串并显示在页面上
+                document.getElementById('jsonContent').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                // 显示错误提示
+                document.getElementById('errorText').textContent = error.message;
+            });
+    </script>
+
+</body>
+</html>
