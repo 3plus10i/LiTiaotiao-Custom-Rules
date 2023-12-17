@@ -1,32 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Page</title>
+    <title>GitHub 页面</title>
     <style>
         /* 添加自定义样式 */
         button {
             padding: 10px 20px; /* 调整按钮内边距，增大按钮尺寸 */
             font-size: 16px; /* 设置按钮文字大小 */
+            cursor: pointer;
+            transition: background-color 0.3s; /* 添加按钮背景色的过渡效果 */
+        }
+        button:hover {
+            background-color: #2980b9; /* 鼠标悬停时改变按钮背景色 */
+        }
+        #copyFeedback {
+            color: green; /* 设置反馈消息颜色为绿色 */
+            margin-top: 10px; /* 调整反馈消息与按钮的垂直间距 */
+        }
+
+        /* 定义按钮点击动画 */
+        @keyframes clickAnimation {
+            0% {
+                transform: scale(1.5);
+            }
+            25% {
+                transform: scale(2) rotate(720deg) translateX(55px);
+            }
+            50% {
+                transform: scale(0.5) rotate(720deg) translateX(36px);
+            }
+            75% {
+                transform: scale(1.5) rotate(-180deg) translateX(-15px);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* 添加 clicked 类的动画 */
+        button.clicked {
+            animation: clickAnimation 3s ease-in-out; /* 添加按钮点击动画 */
+            background-color: #3498db; /* 设置按钮背景色 */
+            color: #fff; /* 设置文字颜色为白色 */
+            border: none;
+            border-radius: 5px; /* 圆角边框 */
         }
     </style>
 </head>
 <body>
-    
-    <!-- 添加复制按钮 -->
-    <button onclick="copyToClipboard()">Copy</button>
+
+    <h1>BasicRules.json 内容</h1>
 
     <pre id="jsonContent"></pre>
     <p id="errorText" style="color: red;"></p>
 
+    <!-- 添加复制按钮 -->
+    <button onclick="copyToClipboard()">复制</button>
+    <!-- 显示复制成功的反馈消息 -->
+    <p id="copyFeedback"></p>
 
     <script>
         // 使用Fetch API获取BasicRules.json文件内容
         fetch('BasicRules.json')
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Failed to fetch BasicRules.json');
+                    throw new Error('获取 BasicRules.json 失败');
                 }
                 return response.json();
             })
@@ -39,7 +79,7 @@
                 document.getElementById('errorText').textContent = error.message;
             });
 
-        // 复制内容到剪贴板
+        // 复制内容到剪贴板，触发按钮点击动画
         function copyToClipboard() {
             const jsonContent = document.getElementById('jsonContent');
             const textArea = document.createElement('textarea');
@@ -48,6 +88,23 @@
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
+
+            // 提供复制成功的反馈消息
+            const copyFeedback = document.getElementById('copyFeedback');
+            copyFeedback.textContent = '已复制到剪贴板!';
+
+            // 触发按钮点击动画
+            const button = document.querySelector('button');
+            button.textContent = '已复制'; // 修改按钮文字
+            button.classList.add('clicked');
+
+            // 清空反馈消息，以便下一次复制
+            setTimeout(() => {
+                copyFeedback.textContent = '';
+                button.textContent = '复制'; // 恢复按钮文字
+                // 移除按钮点击动画类
+                button.classList.remove('clicked');
+            }, 3000); // 3秒后清空
         }
     </script>
 
