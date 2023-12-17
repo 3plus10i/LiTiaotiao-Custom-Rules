@@ -222,7 +222,7 @@
 		"-328022007": "{\"popup_rules\":[{\"id\":\"广告\",\"action\":\"跳过\"},{\"id\":\"main_ad_alert\",\"action\":\"main_ad_alert_close\"},{\"id\":\"slideshowView\",\"action\":\"ivClose\"}]}"
 	},
 	{
-		"1174097286": "{\"popup_rules\":[{\"id\":\"icon_cart_egg_close\",\"action\":\"icon_cart_egg_close\"},{\"id\":\"弹窗\",\"action\":\"关闭按钮\"},{\"id\":\"发现新版本\",\"action\":\"取消\"}]}"
+		"1174097286": "{\"popup_rules\":[{\"id\":\"弹窗\",\"action\":\"关闭按钮\"},{\"id\":\"发现新版本\",\"action\":\"取消\"}]}"
 	},
 	{
 		"2029054607": "{\"popup_rules\":[{\"id\":\"tt_splash_ad_logo\",\"action\":\"tt_splash_skip_btn\"}]}"
