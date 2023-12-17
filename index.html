@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Page</title>
+    <style>
+        /* 添加自定义样式 */
+        button {
+            padding: 10px 20px; /* 调整按钮内边距，增大按钮尺寸 */
+            font-size: 16px; /* 设置按钮文字大小 */
+        }
+    </style>
 </head>
 <body>
-
-    <h1>BasicRules.json Content</h1>
+    
+    <!-- 添加复制按钮 -->
+    <button onclick="copyToClipboard()">Copy</button>
 
     <pre id="jsonContent"></pre>
     <p id="errorText" style="color: red;"></p>
+
 
     <script>
         // 使用Fetch API获取BasicRules.json文件内容
@@ -29,6 +38,17 @@
                 // 显示错误提示
                 document.getElementById('errorText').textContent = error.message;
             });
+
+        // 复制内容到剪贴板
+        function copyToClipboard() {
+            const jsonContent = document.getElementById('jsonContent');
+            const textArea = document.createElement('textarea');
+            textArea.value = jsonContent.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+        }
     </script>
 
 </body>
